@@ -56,7 +56,7 @@ def baliho():
 		print 'ooO--(_)--Ooo'.center(44)
 		print ' ' + W
 		print ('Mpu YONO').center(44)
-		print (W + '     [' + G +'ALAT SEDOT EMAIL DOREMON'+ W + ']')
+		print (W + '        [' + G +'ALAT SEDOT EMAIL DOREMON'+ W + ']')
 		print ' '
 ####################################################################
 #		    Print In terminal
