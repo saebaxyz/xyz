@@ -911,6 +911,7 @@ def main():
   global target_id
 
   try:
+	print '##################################'
 	print '[1] Login Token'
 	print '[2] Logout Keluar Token'
 	print '[3] Ambil Daftar Email Semua Teman'
