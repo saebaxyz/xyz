@@ -827,19 +827,20 @@ def dump_mail():
 
 		out = open('output/' + n[0].split(' ')[0] + '_mails.txt','w')
 		outy = open('output/' + n[0].split(' ')[0] + '_yaho.txt','w')
-		outh = open('output/' + n[0].split(' ')[0] + '_hotm.txt','w')
+		outh = open('output/' + n[0].split(' ')[0] + '_hotoa.txt','w')
 
 		for i in a['data']:
 			x = requests.get("https://graph.facebook.com/"+i['id']+"?access_token="+token)
                         z = json.loads(x.text)
 
 			try:
-			    out.write(z['name'] + ' , ' +i['id'] +' , '+ z['email'] + '\n');
+			    out.write(z['email'] + ' , ' +i['id'] +' , '+ z['name'] + '\n');
 			    if('@yahoo.com' in z['email']) :
-			       outy.write(z['name'] + ' , ' +i['id'] +' , '+ z['email'] + '\n');
-			    if('@hotmail.com' in z['email']) :
-			       outh.write(z['name'] + ' , ' +i['id'] +' , '+ z['email'] + '\n')
-			    print W + '[' + G + z['name'] + W + ']' + R + ' >> ' + W + z['email']
+			       outy.write(z['email'] + ' , ' +i['id'] +' , '+ z['name'] + '\n');
+			    if('@hotmail.com'or'@outlook.com'or'@aol.com') in z['email'] :
+			       outh.write(z['email'] + ' , ' +i['id'] +' , '+ z['name'] + '\n')
+                   
+			    print W + '[' + G + z['name'] + W + ']' + R + '>>' + W + z['email'] + W + ' [' + G + i['id'] + W + ']'
 			except KeyError:
 			    pass;
 		out.close();
