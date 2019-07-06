@@ -826,8 +826,10 @@ def dump_mail():
                 a = json.loads(r.text)
 
 		out = open('output/' + n[0].split(' ')[0] + '_mails.txt','w')
-		outy = open('output/' + n[0].split(' ')[0] + '_yaho.txt','w')
-		outh = open('output/' + n[0].split(' ')[0] + '_hotoa.txt','w')
+		outy = open('output/ytmp.txt','w')
+		outh = open('output/htmp.txt','w')
+		outy2 = open('output/' + n[0].split(' ')[0] + '_yaho.txt','w')
+		outh2 = open('output/' + n[0].split(' ')[0] + '_hotoa.txt','w')
 
 		for i in a['data']:
 			x = requests.get("https://graph.facebook.com/"+i['id']+"?access_token="+token)
@@ -836,16 +838,27 @@ def dump_mail():
 			try:
 			    out.write(z['email'] + ' , ' +i['id'] +' , '+ z['name'] + '\n');
 			    if('@yahoo.com' in z['email']) :
-			       outy.write(z['email'] + ' , ' +i['id'] +' , '+ z['name'] + '\n');
+			       outy.write(z['email'] + ',' +i['id'] +','+ z['name'] + '\n');
 			    if('@hotmail.com'or'@outlook.com'or'@aol.com') in z['email'] :
-			       outh.write(z['email'] + ' , ' +i['id'] +' , '+ z['name'] + '\n')
+			       outh.write(z['email'] + ',' +i['id'] +','+ z['name'] + '\n')
                    
 			    print W + '[' + G + z['name'] + W + ']' + R + '>>' + W + z['email'] + W + ' [' + G + i['id'] + W + ']'
 			except KeyError:
 			    pass;
 		out.close();
+		sort = sorted(outy,key=operator.itemgetter(1))
+		for eachline in sort:
+		  outy2.write(eachline)
+		sort = sorted(outh,key=operator.itemgetter(1))
+		for eachline in sort:
+		  outh2.write(eachline)
+
 		outy.close();
 		outh.close();
+		outy2.close();
+		outh2.close();
+		os.system('rm -rf output/ytmp.txt')
+		os.system('rm -rf output/htmp.txt')
 
                 print '[*] done'
                 print "[*] all emails successfuly retrieved"
